@@ -1,5 +1,5 @@
 # holonomic_interpreter
-Converts non-holonomic cmd_vel inputs into holonomic commands using a PID controller. To be used for the ground team robots at the UF Autonomy Park
+Converts holonomic cmd_vel inputs into non-holonomic commands using a PID controller. To be used for the ground team robots at the UF Autonomy Park
 
 ## Parameters
 | Parameter Name | Type | Description | Default |
@@ -7,10 +7,9 @@ Converts non-holonomic cmd_vel inputs into holonomic commands using a PID contro
 | `heading_kp` | double | Proportional gain for PID controller | 1.0 |
 | `heading_ki` | double | Integral gain for PID controller | 0.0 |
 | `heading_kd` | double | Derivative Gain for PID controller | 0.1 | 
-| `max_vel` | double | Saturates velocity setpoint at this value | 0.5 |
-| `min_vel` | double | Currently unused | 0.15 |
-| `max_ang_acc` | double | Currently unused | 0.05 |
-| `origin rotation` | double | Currently unused | -0.6021965548550632 |
+| `max_lin_vel` | double | Saturates velocity setpoint at this value [m/s] | 0.5 |
+| `origin rotation` | double | Used for conversion of quaternion into yaw angle [rad] | -0.6021965548550632 |
+| `control_loop_frequency` | int | Dictates update rate of non-holonomic_cmd_vel outputs [Hz] | 100 |
 
 
 ## Subscribers
@@ -22,11 +21,10 @@ Converts non-holonomic cmd_vel inputs into holonomic commands using a PID contro
 ## Publishers
 | Topic Name | Type | Description |
 | -------- | ------- | ------- |
-| `nonholo_cmd_vel` | `Twist` | |
-| `control_error` | `Float64` |  | 
-| `control_setpoint` | `Float64` |  | 
-| `nonholo_cmd_vel_stamped` | `TwistWithCovarianceStamped` |  | 
-| `heading` | `Float64` |  | 
+| `nonholo_cmd_vel` | `Twist` | Resultant non-holonomic velocity output from PD |
 
 ## Notes
-The PID controller in `src/pid.cpp` is sourced from [bradley2019's implementation](https://gist.github.com/bradley219/5373998)
+Currently just a PD controller
+
+## TO-DO:
+- [] Add integral term in controller
