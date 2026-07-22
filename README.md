@@ -27,4 +27,4 @@ Converts holonomic cmd_vel inputs into non-holonomic commands using a PID contro
 Currently just a PD controller
 
 ## TO-DO:
-- [] Add integral term in controller
+- Add integral term in controller
